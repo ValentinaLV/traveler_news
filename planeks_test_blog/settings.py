@@ -89,13 +89,24 @@ WSGI_APPLICATION = 'planeks_test_blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env.str('DB_NAME'),
+#         'USER': env.str('DB_USER'),
+#         'PASSWORD': env.str('DB_PASSWORD'),
+#         'HOST': env.str('DB_HOST'),
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PASSWORD'),
-        'HOST': env.str('DB_HOST'),
+        'NAME': 'traveler2',
+        'USER': 'postgres',
+        'PASSWORD': 'Tinka140792',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
