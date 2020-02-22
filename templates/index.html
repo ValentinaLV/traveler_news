@@ -102,7 +102,7 @@
                                                     <span><i class="icon-folder-o mr-2"></i>Travel</span>
                                                 </p>
                                             </div>
-                                            <p class="mb-4">{{ post.content | truncatewords:10 }}</p>
+                                            <p class="mb-4">{{ post.get_markdown | truncatewords:10 }}</p>
                                             <p><a href="{{ post.get_absolute_url }}" class="btn-custom">Read More <span
                                                     class="ion-ios-arrow-forward"></span></a></p>
                                         </div>
@@ -132,6 +132,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{% static 'js/google-map.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.0/marked.min.js"></script>
 
 </body>
 </html>

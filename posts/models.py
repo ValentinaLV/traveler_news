@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+
+from markdown import markdown
 
 from user.models import CustomUser
 from user.utils import send_email
@@ -32,6 +35,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('posts:post-details', kwargs={'slug': self.slug})
+
+    def get_markdown(self):
+        return mark_safe(markdown(self.content, safe_mode='escape'))
 
     def __str__(self):
         return f"{self.title}"

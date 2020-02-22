@@ -1,17 +1,19 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from pagedown.widgets import PagedownWidget
 
 from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
+    content = forms.CharField(widget=PagedownWidget)
+
     class Meta:
         model = Post
         fields = ['title', 'content']
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Post Title'}),
-            'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Post Content'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Post Title'})
         }
 
     def clean_slug(self):
