@@ -165,7 +165,8 @@ ACCOUNT_EMAIL_REQUIRED = (True)
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = env.str('SENDGRID_API_KEY')
+#EMAIL_HOST_PASSWORD = env.str('SENDGRID_API_KEY')
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
