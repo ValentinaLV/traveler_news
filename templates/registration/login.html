@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div id="colorlib-main">
+        <div class="container col-lg-12 px-md-5 py-5">
+            <div class="mx-auto">
+                <hr>
+                <h1 class="text-center">Login or Create New Account</h1>
+                <hr>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 mx-auto bg-light text-center">
+                    <br>
+                    <h2>New User?</h2>
+                    <p>When you create an account with us, you can create/update/delete your posts and like/unlike other
+                        posts.</p>
+                    <a href="{% url 'user:django_registration_register' %}" class="btn btn-primary base-btn">
+                        Create account
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mx-auto bg-light">
+                <div class="mx-auto">
+                    <br>
+                    <h2 class="text-center">Registered Customers Only</h2>
+                    <div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <p>{{ form | crispy }}</p>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

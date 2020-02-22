@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div id="colorlib-main">
+        <div class="container col-lg-10 px-md-5 py-5">
+            {% if not form.is_valid %}
+                <div class="mx-auto">
+                    <hr>
+                    <h1 class="text-center">Create new account</h1>
+                    <hr>
+                    <div class="col-10 col-sm-9 col-md-6 col-lg-8 mx-auto bg-light">
+                        <br>
+                        <p>Enter the following information to create new account</p>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <p>{{ form | crispy }}</p>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class="mx-auto">
+                    <hr>
+                    <h1 class="text-center">Your account has been successfully created</h1>
+                    <hr>
+                    <div>
+                        <p>
+                            Dear user,<br>
+                            Your account has been created and it is ready to use.<br>
+                        </p>
+                        <a href="accounts/login/" class="btn btn-primary">Sign in for creating post</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
