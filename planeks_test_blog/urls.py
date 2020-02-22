@@ -18,12 +18,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from user.views import index
+from posts.views import posts_list
 
 urlpatterns = [
 
-    path('', index, name='home-page'),
+    path('', posts_list, name='home-page'),
     path('user/', include(('user.urls', 'user'), namespace='user')),
+    path('posts/', include(('posts.urls', 'posts'), namespace='posts')),
 
     path('admin/', admin.site.urls),
 

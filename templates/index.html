@@ -38,12 +38,16 @@
     <a href="{% url 'home-page' %}" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
     <aside id="colorlib-aside" role="complementary" class="js-fullheight img"
            style="background-image: url(../static/images/sidebar-bg.jpg);">
-        <h1 id="colorlib-logo" class="mb-4"><a href="index.html">traveler</a></h1>
+        <h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home-page' %}">traveler</a></h1>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
                 <li class="colorlib-active"><a href="{% url 'home-page' %}">Home</a></li>
 
-                {% if not request.users.is_authenticated %}
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'posts:post-create' %}">&plus;Add Post</a></li>
+                {% endif %}
+
+                {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'user:django_registration_register' %}">Sign up</a></li>
                     <li><a href="/accounts/login/">Sign in</a></li>
                 {% else %}
@@ -78,26 +82,34 @@
                 <div class="container px-0">
                     <div class="row no-gutters">
 
-                        <div class="col-md-4 d-flex">
-                            <div class="blog-entry ftco-animate">
-                                <a href="#" class="img"
-                                   style="background-image: url(../static/images/image_1.jpg);"></a>
-                                <div class="text p-4">
-                                    <h3 class="mb-2"><a href="#">A Loving Heart is the Truest Wisdom</a></h3>
-                                    <div class="meta-wrap">
-                                        <p class="meta">
-                                            <span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-                                            <span><a href="#"><i
-                                                    class="icon-folder-o mr-2"></i>Travel</a></span>
-                                        </p>
-                                    </div>
-                                    <p class="mb-4">A small river named Duden flows by their place and supplies</p>
-                                    <p><a href="#" class="btn-custom">Read More <span
-                                            class="ion-ios-arrow-forward"></span></a>
-                                    </p>
+                        {% for post in posts %}
+                            <div class="col-md-4 d-flex">
+                                <div class="blog-entry ftco-animate">
+
+                                    {% if post.moderation_status == '1' or  post.moderation_status == 'Approve' %}
+                                        {% if post.image.url %}
+                                            <img src="{{ post.image.url }}" alt="" class="img">
+                                        {% endif %}
+
+                                        <div class="text p-4">
+                                            <h3 class="mb-2">
+                                                <a href="{{ post.get_absolute_url }}">{{ post.title | truncatewords:7 }}</a>
+                                            </h3>
+                                            <div class="meta-wrap">
+                                                <p class="meta">
+                                                    <span><i
+                                                            class="icon-calendar mr-2"></i>{{ post.created_date }}</span>
+                                                    <span><i class="icon-folder-o mr-2"></i>Travel</span>
+                                                </p>
+                                            </div>
+                                            <p class="mb-4">{{ post.content | truncatewords:10 }}</p>
+                                            <p><a href="{{ post.get_absolute_url }}" class="btn-custom">Read More <span
+                                                    class="ion-ios-arrow-forward"></span></a></p>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>

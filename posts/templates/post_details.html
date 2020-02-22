@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <div id="colorlib-main">
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container px-0">
+                <div class="row no-gutters">
+                    <div class="col-md-12 blog-wrap">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-md-6 img js-fullheight">
+                                <img src="{{ post.image.url }}" alt="" class="col-md-12 img js-fullheightz">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text p-md-5 p-4 ftco-animate">
+                                    <div class="heading">
+                                        <div class="meta-wrap">
+                                            <p class="meta">
+                                                <span><i class="icon-calendar mr-2"></i>{{ post.created_date }}</span>
+                                                <span><i class="icon-comment2 mr-2"></i>{{ count_comments }}&nbsp; Comments</span>
+                                            </p>
+                                        </div>
+                                        <h2 class="mb-5">{{ post.title }}</h2>
+                                    </div>
+                                    <div class="icon d-flex align-items-center my-5">
+                                        <div class="img"></div>
+                                        <div class="position pl-3">
+                                            <h4 class="mb-0">{{ post.author.first_name }} {{ post.author.last_name }}</h4>
+                                            <h4 class="mb-0">{{ post.author.username }}</h4>
+                                            <span>{{ post.author.email }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <p>{{ post.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container col-lg-10 px-md-5 py-5">
+            <div class="pt-5 mt-5">
+                <h3 class="mb-5 font-weight-bold">{{ count_comments }}&nbsp;Comments</h3>
+
+                <ul class="comment-list">
+                    {% for comment in comments %}
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                     class="img img-rounded img-fluid"/>
+                            </div>
+                            <div class="comment-body">
+                                <h3>{{ comment.user }}</h3>
+                                <div class="meta">{{ comment.created_date }}</div>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="comment-form-wrap pt-5">
+                    <h3 class="mb-5">Leave a comment</h3>
+
+                    <form action="" method="post"
+                          class="p-3 p-md-4 bg-light">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field }}
+                        {% endfor %}
+
+                        <div class="form-group text-center">
+                            <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
