@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 from environs import Env
 
@@ -29,7 +30,10 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+
+#for heroku app
+ALLOWED_HOSTS = ['traveler-news.herokuapp.com']
 
 # Application definition
 
@@ -133,6 +137,8 @@ LOGOUT_REDIRECT_URL = 'home-page'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+#for heroku app
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -161,3 +167,6 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = env.str('SENDGRID_API_KEY')
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#for heroku app
+django_heroku.settings(locals())
