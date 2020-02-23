@@ -25,16 +25,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = env.str('SECRET_KEY')
-SECRET_KEY = '0enm4ni+j48_a5-+n19(=*eq&s*as3m%^34a=c#m5i*tj6r#!('
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 #for heroku app
-ALLOWED_HOSTS = ['traveler-news.herokuapp.com']
+#ALLOWED_HOSTS = ['traveler-news.herokuapp.com']
 
 # Application definition
 
@@ -89,27 +88,17 @@ WSGI_APPLICATION = 'planeks_test_blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env.str('DB_NAME'),
-#         'USER': env.str('DB_USER'),
-#         'PASSWORD': env.str('DB_PASSWORD'),
-#         'HOST': env.str('DB_HOST'),
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'traveler2',
-        'USER': 'postgres',
-        'PASSWORD': 'Tinka140792',
-        'HOST': 'localhost',
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
+        'HOST': env.str('DB_HOST'),
         'PORT': '5432',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -176,10 +165,9 @@ ACCOUNT_EMAIL_REQUIRED = (True)
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-#EMAIL_HOST_PASSWORD = env.str('SENDGRID_API_KEY')
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = env.str('SENDGRID_API_KEY')
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #for heroku app
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
